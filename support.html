@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StakeHabit — Support</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            background: #0a0a0a;
+            color: #e5e5e5;
+            line-height: 1.6;
+        }
+
+        header {
+            padding: 64px 24px 48px;
+            text-align: center;
+            border-bottom: 1px solid #1f1f1f;
+        }
+
+        .header-logo {
+            font-size: 1rem;
+            font-weight: 800;
+            color: #888;
+            text-decoration: none;
+            letter-spacing: -0.3px;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .header-logo span {
+            color: #ff9500;
+        }
+
+        header h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            color: #fff;
+        }
+
+        header p {
+            margin-top: 8px;
+            color: #888;
+            font-size: 1rem;
+        }
+
+        main {
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 48px 24px 96px;
+        }
+
+        section {
+            margin-bottom: 56px;
+        }
+
+        section h2 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #ff9500;
+            margin-bottom: 24px;
+        }
+
+        .faq-item {
+            margin-bottom: 28px;
+        }
+
+        .faq-item h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 6px;
+        }
+
+        .faq-item p {
+            font-size: 0.95rem;
+            color: #aaa;
+        }
+
+        .contact-card {
+            background: #141414;
+            border: 1px solid #1f1f1f;
+            border-radius: 12px;
+            padding: 24px;
+        }
+
+        .contact-card p {
+            font-size: 0.95rem;
+            color: #aaa;
+            margin-bottom: 16px;
+        }
+
+        .contact-card a {
+            display: inline-block;
+            background: #ff9500;
+            color: #000;
+            font-weight: 700;
+            font-size: 0.9rem;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+        }
+
+        .contact-card a:hover {
+            background: #ffaa33;
+        }
+
+        footer {
+            text-align: center;
+            padding: 32px 24px;
+            border-top: 1px solid #1f1f1f;
+            color: #555;
+            font-size: 0.8rem;
+        }
+
+        footer a {
+            color: #666;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="header-logo">Stake<span>Habit</span></a>
+        <h1>Support &amp; Help</h1>
+        <p>Answers to common questions about StakeHabit</p>
+    </header>
+
+    <main>
+
+        <section>
+            <h2>Frequently Asked Questions</h2>
+
+            <div class="faq-item">
+                <h3>How does StakeHabit work?</h3>
+                <p>You create a habit, set a penalty amount, and choose a charity you'd rather not donate to. Each day your habit is scheduled, you check in. If you miss, the penalty is automatically charged to your card and donated to your chosen cause.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>When is my card charged?</h3>
+                <p>Only when you log a missed check-in. Nothing is charged on days you complete your habit or on rest days. You are never charged without logging a result first.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>How do I add or update my payment method?</h3>
+                <p>Go to Settings → Payment → Add Payment Method (or Update Card). Your card details are handled securely by Stripe. We never store raw card numbers.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>Can I change my habit after creating it?</h3>
+                <p>You can edit your habit's name and description at any time from the home screen. The schedule, penalty amount, and charity are locked after creation to preserve accountability.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>How do I delete my habit or account?</h3>
+                <p>To delete your habit, open the habit detail view and tap Delete Habit. To permanently delete your account and all associated data, go to Settings → Delete Account. This action cannot be undone.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>Are the donations real?</h3>
+                <p>Yes. When a penalty is charged, the funds (minus a small Stripe processing fee) are donated to the organization you selected when setting up your habit.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>How do I set up daily reminders?</h3>
+                <p>Go to Settings → Notifications → Daily Reminder. Toggle it on, grant notification permission, and set your preferred time. Reminders only fire on days your habit is scheduled and only if you haven't already checked in.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>When does my donation reach the charity?</h3>
+                <p>Donations are processed in batches and sent to your chosen organization within 72 hours of each missed check-in charge.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>I was charged but I did complete my habit. What do I do?</h3>
+                <p>Please contact us using the email below with your account details and the date in question. We'll look into it and make it right.</p>
+            </div>
+        </section>
+
+        <section>
+            <h2>Contact Support</h2>
+            <div class="contact-card">
+                <p>Have a question not covered above, or running into an issue? Send us an email and we'll get back to you as soon as possible.</p>
+                <a href="mailto:willbraycotton@gmail.com">willbraycotton@gmail.com</a>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p><a href="index.html">StakeHabit</a> &nbsp;&middot;&nbsp; <a href="privacy.html">Privacy Policy</a> &nbsp;&middot;&nbsp; <a href="terms.html">Terms of Service</a> &nbsp;&middot;&nbsp; &copy; 2026 StakeHabit</p>
+    </footer>
+
+</body>
+</html>

@@ -3,182 +3,668 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StakeHabit — Support</title>
+    <title>StakeHabit — Build habits that hurt to break</title>
+    <meta name="description" content="StakeHabit turns your habits into financial commitments. Miss a day, and your stake is donated to a cause you'd rather not fund. Available on iPhone.">
+    <meta property="og:title" content="StakeHabit — Build habits that hurt to break">
+    <meta property="og:description" content="Put real money on the line. Miss a habit, fund a cause you hate. The accountability app that actually works.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://stakehabit.app">
     <style>
-        * {
+        *, *::before, *::after {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
+        :root {
+            --orange: #ff9500;
+            --orange-dim: rgba(255, 149, 0, 0.15);
+            --bg: #0a0a0a;
+            --card: #111111;
+            --border: #1e1e1e;
+            --text: #e8e8e8;
+            --muted: #888;
+            --white: #ffffff;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-            background: #0a0a0a;
-            color: #e5e5e5;
+            background: var(--bg);
+            color: var(--text);
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
-        header {
-            padding: 64px 24px 48px;
-            text-align: center;
-            border-bottom: 1px solid #1f1f1f;
+        /* ── NAV ── */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 18px 32px;
+            background: rgba(10, 10, 10, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
-        header h1 {
-            font-size: 2rem;
+        .nav-logo {
+            font-size: 1.1rem;
             font-weight: 800;
             letter-spacing: -0.5px;
-            color: #fff;
-        }
-
-        header p {
-            margin-top: 8px;
-            color: #888;
-            font-size: 1rem;
-        }
-
-        main {
-            max-width: 680px;
-            margin: 0 auto;
-            padding: 48px 24px 96px;
-        }
-
-        section {
-            margin-bottom: 56px;
-        }
-
-        section h2 {
-            font-size: 1.1rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            color: #ff9500;
-            margin-bottom: 24px;
-        }
-
-        .faq-item {
-            margin-bottom: 28px;
-        }
-
-        .faq-item h3 {
-            font-size: 1rem;
-            font-weight: 600;
-            color: #fff;
-            margin-bottom: 6px;
-        }
-
-        .faq-item p {
-            font-size: 0.95rem;
-            color: #aaa;
-        }
-
-        .contact-card {
-            background: #141414;
-            border: 1px solid #1f1f1f;
-            border-radius: 12px;
-            padding: 24px;
-        }
-
-        .contact-card p {
-            font-size: 0.95rem;
-            color: #aaa;
-            margin-bottom: 16px;
-        }
-
-        .contact-card a {
-            display: inline-block;
-            background: #ff9500;
-            color: #000;
-            font-weight: 700;
-            font-size: 0.9rem;
-            padding: 10px 20px;
-            border-radius: 8px;
+            color: var(--white);
             text-decoration: none;
         }
 
-        .contact-card a:hover {
-            background: #ffaa33;
+        .nav-logo span {
+            color: var(--orange);
         }
 
-        footer {
+        .nav-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--white);
+            color: #000;
+            font-size: 0.82rem;
+            font-weight: 700;
+            letter-spacing: 0.01em;
+            padding: 9px 16px;
+            border-radius: 22px;
+            text-decoration: none;
+            transition: background 0.15s, transform 0.1s;
+        }
+
+        .nav-cta:hover {
+            background: #e8e8e8;
+            transform: translateY(-1px);
+        }
+
+        .nav-cta svg {
+            flex-shrink: 0;
+        }
+
+        /* ── HERO ── */
+        .hero {
+            position: relative;
+            min-height: 92vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             text-align: center;
-            padding: 32px 24px;
-            border-top: 1px solid #1f1f1f;
-            color: #555;
+            padding: 80px 24px 100px;
+            overflow: hidden;
+        }
+
+        .hero-glow {
+            position: absolute;
+            top: -80px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 700px;
+            height: 700px;
+            background: radial-gradient(circle, rgba(255, 149, 0, 0.10) 0%, transparent 65%);
+            pointer-events: none;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--orange-dim);
+            border: 1px solid rgba(255, 149, 0, 0.3);
+            border-radius: 20px;
+            padding: 5px 14px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--orange);
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            margin-bottom: 32px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.6rem, 7vw, 5rem);
+            font-weight: 900;
+            letter-spacing: -0.04em;
+            line-height: 1.05;
+            color: var(--white);
+            max-width: 820px;
+            margin-bottom: 24px;
+        }
+
+        .hero h1 em {
+            font-style: normal;
+            color: var(--orange);
+        }
+
+        .hero-sub {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            color: var(--muted);
+            max-width: 520px;
+            line-height: 1.65;
+            margin-bottom: 44px;
+        }
+
+        .hero-actions {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn-appstore {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--white);
+            color: #000;
+            font-size: 0.9rem;
+            font-weight: 700;
+            padding: 14px 24px;
+            border-radius: 12px;
+            text-decoration: none;
+            transition: transform 0.15s, background 0.15s;
+        }
+
+        .btn-appstore:hover {
+            background: #e8e8e8;
+            transform: translateY(-2px);
+        }
+
+        .btn-appstore .store-sub {
+            font-size: 0.65rem;
+            font-weight: 400;
+            opacity: 0.6;
+            display: block;
+            line-height: 1;
+            margin-bottom: 2px;
+        }
+
+        .btn-appstore .store-main {
+            font-size: 1rem;
+            font-weight: 700;
+            display: block;
+            line-height: 1;
+        }
+
+        .hero-note {
             font-size: 0.8rem;
+            color: #555;
+            margin-top: 24px;
+        }
+
+        /* ── DIVIDER ── */
+        .section-divider {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 0;
+        }
+
+        /* ── SECTIONS SHARED ── */
+        section {
+            padding: 96px 24px;
+        }
+
+        .section-inner {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            display: block;
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--orange);
+            margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            font-weight: 900;
+            letter-spacing: -0.03em;
+            color: var(--white);
+            line-height: 1.1;
+            margin-bottom: 16px;
+        }
+
+        .section-sub {
+            font-size: 1rem;
+            color: var(--muted);
+            max-width: 560px;
+            line-height: 1.65;
+        }
+
+        /* ── HOW IT WORKS ── */
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 16px;
+            margin-top: 56px;
+        }
+
+        .step {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 32px;
+            position: relative;
+        }
+
+        .step-number {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--orange-dim);
+            border: 1px solid rgba(255, 149, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.82rem;
+            font-weight: 800;
+            color: var(--orange);
+            margin-bottom: 20px;
+        }
+
+        .step h3 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 10px;
+            letter-spacing: -0.02em;
+        }
+
+        .step p {
+            font-size: 0.92rem;
+            color: var(--muted);
+            line-height: 1.6;
+        }
+
+        /* ── WHY IT WORKS ── */
+        .why-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            align-items: center;
+            margin-top: 56px;
+        }
+
+        .why-text .section-sub {
+            margin-bottom: 32px;
+        }
+
+        .stat-row {
+            display: flex;
+            gap: 32px;
+            flex-wrap: wrap;
+        }
+
+        .stat {
+            flex: 1;
+            min-width: 100px;
+        }
+
+        .stat-value {
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: var(--orange);
+            letter-spacing: -0.04em;
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+
+        .stat-label {
+            font-size: 0.82rem;
+            color: var(--muted);
+        }
+
+        .commitment-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 36px;
+        }
+
+        .commitment-card .quote {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--white);
+            line-height: 1.5;
+            letter-spacing: -0.01em;
+            margin-bottom: 24px;
+        }
+
+        .commitment-card .quote em {
+            font-style: normal;
+            color: var(--orange);
+        }
+
+        .commitment-card .attribution {
+            font-size: 0.82rem;
+            color: #555;
+        }
+
+        /* ── FEATURES ── */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+            margin-top: 56px;
+        }
+
+        .feature {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 24px;
+        }
+
+        .feature-icon {
+            font-size: 1.5rem;
+            margin-bottom: 14px;
+            display: block;
+        }
+
+        .feature h3 {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 6px;
+            letter-spacing: -0.01em;
+        }
+
+        .feature p {
+            font-size: 0.85rem;
+            color: var(--muted);
+            line-height: 1.55;
+        }
+
+        /* ── CTA SECTION ── */
+        .cta-section {
+            text-align: center;
+            background: linear-gradient(180deg, transparent 0%, rgba(255, 149, 0, 0.04) 100%);
+            border-top: 1px solid var(--border);
+        }
+
+        .cta-section .section-title {
+            max-width: 600px;
+            margin: 0 auto 16px;
+        }
+
+        .cta-section .section-sub {
+            margin: 0 auto 44px;
+            text-align: center;
+        }
+
+        .cta-section .btn-appstore {
+            font-size: 1rem;
+            padding: 16px 28px;
+            border-radius: 14px;
+        }
+
+        /* ── FOOTER ── */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 40px 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .footer-brand {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--white);
+            letter-spacing: -0.3px;
+        }
+
+        .footer-brand span {
+            color: var(--orange);
+        }
+
+        .footer-copy {
+            font-size: 0.78rem;
+            color: #444;
+            margin-top: 4px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 24px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            font-size: 0.82rem;
+            color: #555;
+            text-decoration: none;
+            transition: color 0.15s;
+        }
+
+        .footer-links a:hover {
+            color: var(--muted);
+        }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 720px) {
+            nav { padding: 16px 20px; }
+            .hero { min-height: 80vh; padding: 64px 20px 80px; }
+            section { padding: 64px 20px; }
+            .why-grid { grid-template-columns: 1fr; }
+            .commitment-card { order: -1; }
+            footer { flex-direction: column; align-items: flex-start; }
+        }
+
+        @media (max-width: 480px) {
+            .nav-cta { font-size: 0.78rem; padding: 8px 14px; }
+            .hero-badge { font-size: 0.72rem; }
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>StakeHabit</h1>
-        <p>Support &amp; Help</p>
-    </header>
+    <!-- NAV -->
+    <nav>
+        <a href="/" class="nav-logo">Stake<span>Habit</span></a>
+        <a href="https://apps.apple.com/app/stakehabit/id0000000000" class="nav-cta" target="_blank" rel="noopener">
+            <!-- TODO: Replace App Store URL -->
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+            </svg>
+            Download
+        </a>
+    </nav>
 
-    <main>
+    <!-- HERO -->
+    <div class="hero">
+        <div class="hero-glow" aria-hidden="true"></div>
 
-        <section>
-            <h2>Frequently Asked Questions</h2>
+        <div class="hero-badge">
+            <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+                <circle cx="5" cy="5" r="4" fill="#ff9500"/>
+            </svg>
+            Available on iPhone
+        </div>
 
-            <div class="faq-item">
-                <h3>How does StakeHabit work?</h3>
-                <p>You create a habit, set a penalty amount, and choose a charity you'd rather not donate to. Each day your habit is scheduled, you check in. If you miss, the penalty is automatically charged to your card and donated to your chosen cause.</p>
+        <h1>Build habits that <em>hurt</em> to break.</h1>
+
+        <p class="hero-sub">
+            StakeHabit puts real money on the line. Every time you miss a habit, your stake is donated to a cause you'd rather not fund. The accountability that actually sticks.
+        </p>
+
+        <div class="hero-actions">
+            <a href="https://apps.apple.com/app/stakehabit/id0000000000" class="btn-appstore" target="_blank" rel="noopener">
+                <!-- TODO: Replace App Store URL -->
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                </svg>
+                <div>
+                    <span class="store-sub">Download on the</span>
+                    <span class="store-main">App Store</span>
+                </div>
+            </a>
+        </div>
+
+        <p class="hero-note">Free to download &middot; iOS 16+ &middot; Stakes from $1</p>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- HOW IT WORKS -->
+    <section>
+        <div class="section-inner">
+            <span class="section-label">How it works</span>
+            <h2 class="section-title">Simple, ruthless accountability.</h2>
+            <p class="section-sub">Three steps. No complexity. Just a system that makes breaking your habit cost you something real.</p>
+
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Set the stake</h3>
+                    <p>Create your habit, set a penalty ($1–$20 per miss), and choose a charity you'd genuinely hate to fund. The more you dislike it, the better it works.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Check in daily</h3>
+                    <p>Open the app each day and log your result. Did it? Nothing happens — just your streak growing. Reminders keep you honest.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Miss and pay</h3>
+                    <p>Log a miss and your stake is immediately charged and donated. No grace periods, no excuses. The sting is the point.</p>
+                </div>
             </div>
+        </div>
+    </section>
 
-            <div class="faq-item">
-                <h3>When is my card charged?</h3>
-                <p>Only when you log a missed check-in. Nothing is charged on days you complete your habit or on rest days. You are never charged without logging a result first.</p>
+    <hr class="section-divider">
+
+    <!-- WHY IT WORKS -->
+    <section>
+        <div class="section-inner">
+            <div class="why-grid">
+                <div class="why-text">
+                    <span class="section-label">Why it works</span>
+                    <h2 class="section-title">Loss aversion is real.</h2>
+                    <p class="section-sub">
+                        Research consistently shows people are more motivated to avoid losing something than to gain an equivalent reward. StakeHabit turns that psychology into your daily advantage.
+                    </p>
+                    <p class="section-sub" style="margin-top: 16px;">
+                        Most habit apps rely on streaks and badges. Those are easy to ignore. A donation to a cause you oppose? That's not.
+                    </p>
+
+                    <div class="stat-row" style="margin-top: 40px;">
+                        <div class="stat">
+                            <div class="stat-value">2×</div>
+                            <div class="stat-label">more motivating to avoid a loss than gain the same reward</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">$1</div>
+                            <div class="stat-label">minimum stake — enough to make missing feel wrong</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="commitment-card">
+                    <p class="quote">
+                        "You pick the charity. You pick the stake. The only way it doesn't cost you anything is if you <em>actually do the habit.</em>"
+                    </p>
+                    <p class="attribution">StakeHabit — the accountability that comes with consequences</p>
+                </div>
             </div>
+        </div>
+    </section>
 
-            <div class="faq-item">
-                <h3>How do I add or update my payment method?</h3>
-                <p>Go to Settings → Payment → Add Payment Method (or Update Card). Your card details are handled securely by Stripe. We never store raw card numbers.</p>
+    <hr class="section-divider">
+
+    <!-- FEATURES -->
+    <section>
+        <div class="section-inner">
+            <span class="section-label">Features</span>
+            <h2 class="section-title">Everything you need. Nothing you don't.</h2>
+            <p class="section-sub">StakeHabit is deliberately minimal. One habit at a time, done properly.</p>
+
+            <div class="features-grid">
+                <div class="feature">
+                    <span class="feature-icon" aria-hidden="true">💸</span>
+                    <h3>Financial stakes</h3>
+                    <p>Set $1–$20 per missed check-in. Real money means real motivation.</p>
+                </div>
+                <div class="feature">
+                    <span class="feature-icon" aria-hidden="true">🏛️</span>
+                    <h3>Charity donations</h3>
+                    <p>Penalty funds go to your chosen cause. Immediately. No holding onto your money.</p>
+                </div>
+                <div class="feature">
+                    <span class="feature-icon" aria-hidden="true">🔔</span>
+                    <h3>Daily reminders</h3>
+                    <p>Smart notifications on your habit days — only if you haven't already checked in.</p>
+                </div>
+                <div class="feature">
+                    <span class="feature-icon" aria-hidden="true">🔥</span>
+                    <h3>Streak tracking</h3>
+                    <p>Watch your consistency compound. A growing streak is its own motivation.</p>
+                </div>
+                <div class="feature">
+                    <span class="feature-icon" aria-hidden="true">🔒</span>
+                    <h3>Secure payments</h3>
+                    <p>Powered by Stripe. We never see or store your card number.</p>
+                </div>
+                <div class="feature">
+                    <span class="feature-icon" aria-hidden="true">🍎</span>
+                    <h3>Sign in with Apple</h3>
+                    <p>One tap setup. No passwords. Your account is tied to your Apple ID.</p>
+                </div>
             </div>
+        </div>
+    </section>
 
-            <div class="faq-item">
-                <h3>Can I change my habit after creating it?</h3>
-                <p>You can edit your habit's name and description at any time from the home screen. The schedule, penalty amount, and charity are locked after creation to preserve accountability.</p>
-            </div>
+    <hr class="section-divider">
 
-            <div class="faq-item">
-                <h3>How do I delete my habit or account?</h3>
-                <p>To delete your habit, open the habit detail view and tap Delete Habit. To permanently delete your account and all associated data, go to Settings → Delete Account. This action cannot be undone.</p>
-            </div>
+    <!-- CTA -->
+    <section class="cta-section">
+        <div class="section-inner">
+            <span class="section-label">Get started</span>
+            <h2 class="section-title">Ready to back yourself?</h2>
+            <p class="section-sub">Download free. Set your first habit in under two minutes. The only question is: how much do you want it?</p>
 
-            <div class="faq-item">
-                <h3>Are the donations real?</h3>
-                <p>Yes. When a penalty is charged, the funds (minus a small Stripe processing fee) are donated to the organization you selected when setting up your habit.</p>
-            </div>
+            <a href="https://apps.apple.com/app/stakehabit/id0000000000" class="btn-appstore" target="_blank" rel="noopener">
+                <!-- TODO: Replace App Store URL -->
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                </svg>
+                <div>
+                    <span class="store-sub">Download on the</span>
+                    <span class="store-main">App Store</span>
+                </div>
+            </a>
+        </div>
+    </section>
 
-            <div class="faq-item">
-                <h3>How do I set up daily reminders?</h3>
-                <p>Go to Settings → Notifications → Daily Reminder. Toggle it on, grant notification permission, and set your preferred time. Reminders only fire on days your habit is scheduled and only if you haven't already checked in.</p>
-            </div>
-
-            <div class="faq-item">
-                <h3>When does my donation reach the charity?</h3>
-                <p>Donations are processed in batches and sent to your chosen organization within 72 hours of each missed check-in charge.</p>
-            </div>
-
-            <div class="faq-item">
-                <h3>I was charged but I did complete my habit. What do I do?</h3>
-                <p>Please contact us using the email below with your account details and the date in question. We'll look into it and make it right.</p>
-            </div>
-        </section>
-
-        <section>
-            <h2>Contact Support</h2>
-            <div class="contact-card">
-                <p>Have a question not covered above, or running into an issue? Send us an email and we'll get back to you as soon as possible.</p>
-                <a href="mailto:willbraycotton@gmail.com">willbraycotton@gmail.com</a>
-            </div>
-        </section>
-
-    </main>
-
+    <!-- FOOTER -->
     <footer>
-        <p>&copy; 2026 StakeHabit &nbsp;&middot;&nbsp; <a href="privacy.html" style="color: #666;">Privacy Policy</a></p>
+        <div>
+            <div class="footer-brand">Stake<span>Habit</span></div>
+            <div class="footer-copy">&copy; 2026 StakeHabit. All rights reserved.</div>
+        </div>
+        <nav class="footer-links" aria-label="Footer navigation">
+            <a href="support.html">Support</a>
+            <a href="privacy.html">Privacy Policy</a>
+            <a href="terms.html">Terms of Service</a>
+        </nav>
     </footer>
 
 </body>
