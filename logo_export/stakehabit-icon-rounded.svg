@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="g" x1="0.2887" y1="0.0468" x2="0.7113" y2="0.9532">
+      <stop offset="0" stop-color="#FF3B47"></stop>
+      <stop offset="1" stop-color="#C22D36"></stop>
+    </linearGradient>
+    <linearGradient id="sheen" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.16"></stop>
+      <stop offset="0.18" stop-color="#ffffff" stop-opacity="0"></stop>
+    </linearGradient>
+  </defs>
+  <rect x="0.5" y="0.5" width="1023" height="1023" rx="229.0688" ry="229.0688" fill="url(#g)"></rect>
+  <rect x="0.5" y="0.5" width="1023" height="1023" rx="229.0688" ry="229.0688" fill="url(#sheen)"></rect>
+  <rect x="0.5" y="0.5" width="1023" height="1023" rx="229.0688" ry="229.0688" fill="none" stroke="rgba(255,255,255,0.14)" stroke-width="2"></rect>
+  <g transform="translate(245.76,245.76) scale(22.1867)" fill="none" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m11 17 2 2a1 1 0 1 0 3-3"></path><path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4"></path><path d="m21 3 1 11h-2"></path><path d="M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3"></path><path d="M3 4h8"></path></g>
+</svg>
