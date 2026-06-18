@@ -613,7 +613,7 @@ footer {
         <p class="hero-sub">StakeHabit puts your cash behind a cause you can't stand. Skip your habit and the money goes straight to them — so you won't skip.</p>
         <div class="hero-actions">
           <div id="waitlist-container">
-            <form class="email-form" id="waitlist-form" onsubmit="submitWaitlist(event)" novalidate>
+            <form class="email-form" id="waitlist-form" novalidate>
               <label for="waitlist-email" class="sr-only">Email address</label>
               <div class="waitlist-row">
                 <input id="waitlist-email" class="email-input" type="email" placeholder="your@email.com" required>
@@ -985,18 +985,12 @@ async function submitWaitlist(e) {
   const input = document.getElementById(‘waitlist-email’);
   const btn = document.getElementById(‘waitlist-btn’);
   const errEl = document.getElementById(‘waitlist-error’);
-
-  if (!input.checkValidity()) {
-    errEl.textContent = ‘Please enter a valid email address.’;
-    errEl.style.display = ‘block’;
-    return;
-  }
-
   const email = input.value.trim();
+
   btn.disabled = true;
   btn.textContent = ‘Joining…’;
   errEl.style.display = ‘none’;
-  console.log(‘[waitlist] fetching…’);
+  console.log(‘[waitlist] fetching’, email);
 
   try {
     const res = await fetch(BACKEND_URL + ‘/waitlist’, {
@@ -1015,6 +1009,8 @@ async function submitWaitlist(e) {
     errEl.style.display = ‘block’;
   }
 }
+
+document.getElementById('waitlist-form').addEventListener('submit', submitWaitlist);
 
 // ── Nav scroll behavior ──────────────────────────────────────
 const nav = document.getElementById('nav');
