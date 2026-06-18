@@ -94,6 +94,13 @@ a { color: inherit; text-decoration: none; }
 .btn-lg { height: 56px; padding: 0 26px; font-size: 17px; }
 .btn-sm { height: 44px; padding: 0 18px; font-size: 15px; }
 
+/* ── ACCESSIBILITY ─────────────────────────────────────── */
+.sr-only {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0,0,0,0); white-space: nowrap; border-width: 0;
+}
+
 /* ── APP STORE BADGE ───────────────────────────────────── */
 .appstore-badge {
   display: inline-flex; align-items: center; gap: 13px;
@@ -204,9 +211,48 @@ a { color: inherit; text-decoration: none; }
   max-width: 480px; text-wrap: pretty;
 }
 .hero-actions {
-  display: flex; flex-wrap: wrap; align-items: center;
+  display: flex; flex-direction: column; align-items: flex-start;
   gap: 14px; margin-top: 36px;
 }
+.email-form {
+  display: flex; flex-direction: column; gap: 10px;
+}
+.waitlist-row {
+  display: flex; flex-wrap: wrap; gap: 10px;
+  align-items: stretch;
+}
+.email-input {
+  flex: 1 1 200px; height: 52px; padding: 0 18px;
+  border: 1px solid var(--line); border-radius: 14px;
+  background: var(--card); color: var(--text);
+  font-family: var(--font-t); font-size: 15px; font-weight: 500;
+  outline: none; min-width: 0;
+}
+.email-input::placeholder { color: var(--muted); }
+.email-input:focus { border-color: var(--stake); }
+.email-btn {
+  height: 52px; padding: 0 22px;
+  border-radius: 14px;
+  background: var(--stake); color: #fff;
+  font-family: var(--font-t); font-size: 15px; font-weight: 700;
+  letter-spacing: -0.2px;
+  border: none; cursor: pointer; white-space: nowrap; flex-shrink: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+.email-btn:disabled { opacity: 0.7; cursor: default; }
+.waitlist-helper {
+  font-family: var(--font-t); font-size: 12px; font-weight: 500;
+  color: #75757e; margin: 0;
+}
+.waitlist-error {
+  font-family: var(--font-t); font-size: 13px; font-weight: 500;
+  color: var(--danger); margin: 0; display: none;
+}
+.waitlist-success {
+  font-family: var(--font-t); font-size: 16px; font-weight: 600;
+  color: var(--text); line-height: 1.4;
+}
+.waitlist-success-accent { color: var(--stake); }
 .phone-drop {
   display: flex; justify-content: center;
   filter: drop-shadow(0 50px 70px rgba(0,0,0,0.6))
@@ -328,8 +374,8 @@ a { color: inherit; text-decoration: none; }
 .feat-bullets { display: flex; flex-direction: column; gap: 11px; margin-top: 26px; }
 .feat-bullet { display: flex; gap: 11px; align-items: center; }
 .bullet-check {
-  width: 18px; height: 18px; border-radius: 9px;
-  background: var(--safe-dim);
+  width: 26px; height: 26px; border-radius: 13px;
+  background: var(--danger-dim); border: 1.5px solid var(--danger);
   display: flex; align-items: center; justify-content: center;
   flex-shrink: 0;
 }
@@ -561,16 +607,16 @@ footer {
         <h1 class="hero-h1">Build the habit.<br><span class="accent">Or fund the cause you can't stand.</span></h1>
         <p class="hero-sub">StakeHabit puts your cash behind a cause you can't stand. Skip your habit and the money goes straight to them — so you won't skip.</p>
         <div class="hero-actions">
-          <div class="appstore-badge" aria-label="Coming soon to the App Store">
-            <!-- Apple logo -->
-            <svg width="26" height="32" viewBox="0 0 17 20" fill="none" aria-hidden="true" style="flex-shrink:0;">
-              <path d="M14.3 15.6c-.4.9-.6 1.3-1.1 2.1-.7 1.1-1.7 2.4-2.9 2.4-1.1 0-1.4-.7-2.9-.7-1.5 0-1.8.7-2.9.7-1.2 0-2.1-1.2-2.8-2.2C-.5 14.9-.7 11 1 9c.9-1.4 2.4-2.2 3.8-2.2 1.4 0 2.3.8 3.5.8 1.1 0 1.8-.8 3.5-.8 1.2 0 2.6.7 3.5 1.8-3.1 1.7-2.6 6.1.0 7Z" fill="#000"/>
-              <path d="M10.6 4.5c.6-.8 1.1-1.9.9-3-1 .1-2.1.7-2.8 1.5-.6.7-1.1 1.8-.9 2.9 1.1.1 2.2-.6 2.8-1.4Z" fill="#000"/>
-            </svg>
-            <div class="badge-label">
-              <span class="badge-sub">Coming soon to the</span>
-              <span class="badge-main">App Store</span>
-            </div>
+          <div id="waitlist-container">
+            <form class="email-form" id="waitlist-form" onsubmit="submitWaitlist(event)" novalidate>
+              <label for="waitlist-email" class="sr-only">Email address</label>
+              <div class="waitlist-row">
+                <input id="waitlist-email" class="email-input" type="email" placeholder="your@email.com" required>
+                <button class="email-btn" id="waitlist-btn" type="submit">Notify me</button>
+              </div>
+              <p class="waitlist-error" id="waitlist-error">Something went wrong — try again.</p>
+              <p class="waitlist-helper">No spam. One email when we launch, that's it.</p>
+            </form>
           </div>
           <a href="#how" class="btn btn-ghost btn-lg">See how it works</a>
         </div>
@@ -664,18 +710,18 @@ footer {
         <div style="order:1;">
           <div class="eyebrow"><span class="eyebrow-dot"></span><span class="eyebrow-text">The streak</span></div>
           <h2 class="feat-h2">Watch the streak grow.</h2>
-          <p class="feat-body">Every green square is a day you showed up — and money you kept in your pocket. Months of consistency, visible at a glance.</p>
+          <p class="feat-body">Every red square is a day you showed up — and money you kept in your pocket. Months of consistency, visible at a glance.</p>
           <div class="feat-bullets">
             <div class="feat-bullet">
-              <span class="bullet-check"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5" stroke="#39D353" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+              <span class="bullet-check"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5" stroke="#FF3B47" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
               <span class="bullet-label">Heatmap of every check-in</span>
             </div>
             <div class="feat-bullet">
-              <span class="bullet-check"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5" stroke="#39D353" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+              <span class="bullet-check"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5" stroke="#FF3B47" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
               <span class="bullet-label">Current streak + total kept</span>
             </div>
             <div class="feat-bullet">
-              <span class="bullet-check"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5" stroke="#39D353" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+              <span class="bullet-check"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5" stroke="#FF3B47" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
               <span class="bullet-label">One habit, zero clutter</span>
             </div>
           </div>
@@ -693,15 +739,15 @@ footer {
           <p class="feat-body">No streak math, no guilt spirals. Open the app, answer one question — did you do it today? — and get on with your life.</p>
           <div class="feat-bullets">
             <div class="feat-bullet">
-              <span class="bullet-check"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5" stroke="#39D353" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+              <span class="bullet-check"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5" stroke="#FF3B47" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
               <span class="bullet-label">Yes, I did it → streak grows</span>
             </div>
             <div class="feat-bullet">
-              <span class="bullet-check"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5" stroke="#39D353" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+              <span class="bullet-check"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5" stroke="#FF3B47" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
               <span class="bullet-label">No, charge me → money goes</span>
             </div>
             <div class="feat-bullet">
-              <span class="bullet-check"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5" stroke="#39D353" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+              <span class="bullet-check"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5" stroke="#FF3B47" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
               <span class="bullet-label">Takes about three seconds</span>
             </div>
           </div>
@@ -926,6 +972,44 @@ footer {
 </footer>
 
 <script>
+// ── Waitlist ─────────────────────────────────────────────────
+const SUPABASE_URL = 'https://vvqsxglhwjciyzszlxyn.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_Fr2AGclwDKwV2m_6KWRXyQ_6IRBH8rz';
+
+async function submitWaitlist(e) {
+  e.preventDefault();
+  const form = document.getElementById('waitlist-form');
+  const input = document.getElementById('waitlist-email');
+  const btn = document.getElementById('waitlist-btn');
+  const errEl = document.getElementById('waitlist-error');
+
+  if (!form.checkValidity()) { form.reportValidity(); return; }
+
+  btn.disabled = true;
+  btn.textContent = 'Joining…';
+  errEl.style.display = 'none';
+
+  try {
+    const res = await fetch(SUPABASE_URL + '/rest/v1/waitlist', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': SUPABASE_ANON_KEY,
+        'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
+        'Prefer': 'resolution=ignore-duplicates',
+      },
+      body: JSON.stringify({ email: input.value }),
+    });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    document.getElementById(‘waitlist-container’).innerHTML =
+      `<p class="waitlist-success"><span class="waitlist-success-accent">You’re on the list.</span> We’ll email you the moment it’s live.</p>`;
+  } catch (err) {
+    btn.disabled = false;
+    btn.textContent = 'Notify me';
+    errEl.style.display = 'block';
+  }
+}
+
 // ── Nav scroll behavior ──────────────────────────────────────
 const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => {
