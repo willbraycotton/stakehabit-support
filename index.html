@@ -610,17 +610,16 @@ footer {
           <span class="pill-text">Launching on iOS soon — <strong>be first in line</strong></span>
         </div>
         <h1 class="hero-h1">Build the habit.<br><span class="accent">Or fund the cause you can't stand.</span></h1>
-        <p class="hero-sub">StakeHabit puts your cash behind a cause you can't stand. Skip your habit and the money goes straight to them — so you won't skip.</p>
+        <p class="hero-sub">Set a habit, pick a charity you'd never support, and put real money behind showing up. Miss a day, and it's gone.</p>
         <div class="hero-actions">
           <div id="waitlist-container">
             <form class="email-form" id="waitlist-form" novalidate>
               <label for="waitlist-email" class="sr-only">Email address</label>
               <div class="waitlist-row">
                 <input id="waitlist-email" class="email-input" type="email" placeholder="your@email.com" required>
-                <button class="email-btn" id="waitlist-btn" type="submit">Notify me</button>
+                <button class="email-btn" id="waitlist-btn" type="submit">Notify me at launch</button>
               </div>
               <p class="waitlist-error" id="waitlist-error">Something went wrong — try again.</p>
-              <p class="waitlist-helper">No spam. One email when we launch, that's it.</p>
             </form>
           </div>
         </div>
@@ -748,7 +747,7 @@ footer {
             </div>
             <div class="feat-bullet">
               <span class="bullet-check"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5" stroke="#FF3B47" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-              <span class="bullet-label">No, charge me → money goes</span>
+              <span class="bullet-label">I missed today → money goes</span>
             </div>
             <div class="feat-bullet">
               <span class="bullet-check"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5" stroke="#FF3B47" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
@@ -783,7 +782,7 @@ footer {
             </div>
             <div>
               <div class="twist-check-head">Real charges, real stakes</div>
-              <div class="twist-check-body">Your card is only charged when you tap "No, charge me." No subscriptions, no gimmicks.</div>
+              <div class="twist-check-body">Your card is only charged when you tap "I missed today." No subscriptions, no gimmicks.</div>
             </div>
           </div>
           <div class="twist-check">
@@ -833,7 +832,7 @@ footer {
           </span>
         </button>
         <div class="faq-body open">
-          <p class="faq-a">Only when you tap "No, charge me" on a habit day. If you check in or there's no habit scheduled, nothing happens. No subscription, no surprise fees.</p>
+          <p class="faq-a">Only when you tap "I missed today" on a habit day. If you check in or there's no habit scheduled, nothing happens. No subscription, no surprise fees.</p>
         </div>
       </div>
 
@@ -1004,7 +1003,7 @@ async function submitWaitlist(e) {
       `<p class="waitlist-success"><span class="waitlist-success-accent">You're on the list.</span> We'll email you the moment it's live.</p>`;
   } catch (err) {
     btn.disabled = false;
-    btn.textContent = 'Notify me';
+    btn.textContent = 'Notify me at launch';
     errEl.textContent = 'Something went wrong — try again.';
     errEl.style.display = 'block';
   }
