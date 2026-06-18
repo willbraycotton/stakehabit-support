@@ -977,36 +977,36 @@ footer {
 
 <script>
 // ── Waitlist ─────────────────────────────────────────────────
-const BACKEND_URL = ‘https://hold-me-to-it-production.up.railway.app’;
+const BACKEND_URL = 'https://hold-me-to-it-production.up.railway.app';
 
 async function submitWaitlist(e) {
   e.preventDefault();
-  console.log(‘[waitlist] submit fired’);
-  const input = document.getElementById(‘waitlist-email’);
-  const btn = document.getElementById(‘waitlist-btn’);
-  const errEl = document.getElementById(‘waitlist-error’);
+  console.log('[waitlist] submit fired');
+  const input = document.getElementById('waitlist-email');
+  const btn = document.getElementById('waitlist-btn');
+  const errEl = document.getElementById('waitlist-error');
   const email = input.value.trim();
 
   btn.disabled = true;
-  btn.textContent = ‘Joining…’;
-  errEl.style.display = ‘none’;
-  console.log(‘[waitlist] fetching’, email);
+  btn.textContent = 'Joining…';
+  errEl.style.display = 'none';
+  console.log('[waitlist] fetching', email);
 
   try {
-    const res = await fetch(BACKEND_URL + ‘/waitlist’, {
-      method: ‘POST’,
-      headers: { ‘Content-Type’: ‘application/json’ },
+    const res = await fetch(BACKEND_URL + '/waitlist', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email }),
     });
-    // 201 = added, 409 = already on list — both are a success from the user’s view
-    if (!res.ok && res.status !== 409) throw new Error(‘HTTP ‘ + res.status);
-    document.getElementById(‘waitlist-container’).innerHTML =
-      `<p class="waitlist-success"><span class="waitlist-success-accent">You’re on the list.</span> We’ll email you the moment it’s live.</p>`;
+    // 201 = added, 409 = already on list — both are a success from the user's view
+    if (!res.ok && res.status !== 409) throw new Error('HTTP ' + res.status);
+    document.getElementById('waitlist-container').innerHTML =
+      `<p class="waitlist-success"><span class="waitlist-success-accent">You're on the list.</span> We'll email you the moment it's live.</p>`;
   } catch (err) {
     btn.disabled = false;
-    btn.textContent = ‘Notify me’;
-    errEl.textContent = ‘Something went wrong — try again.’;
-    errEl.style.display = ‘block’;
+    btn.textContent = 'Notify me';
+    errEl.textContent = 'Something went wrong — try again.';
+    errEl.style.display = 'block';
   }
 }
 
