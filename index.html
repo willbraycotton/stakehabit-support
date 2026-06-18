@@ -981,20 +981,22 @@ const BACKEND_URL = ‘https://hold-me-to-it-production.up.railway.app’;
 
 async function submitWaitlist(e) {
   e.preventDefault();
+  console.log(‘[waitlist] submit fired’);
   const input = document.getElementById(‘waitlist-email’);
   const btn = document.getElementById(‘waitlist-btn’);
   const errEl = document.getElementById(‘waitlist-error’);
 
-  const email = input.value.trim();
-  if (!email.includes(‘@’) || email.indexOf(‘@’) === 0 || !email.slice(email.indexOf(‘@’)).includes(‘.’)) {
+  if (!input.checkValidity()) {
     errEl.textContent = ‘Please enter a valid email address.’;
     errEl.style.display = ‘block’;
     return;
   }
 
+  const email = input.value.trim();
   btn.disabled = true;
   btn.textContent = ‘Joining…’;
   errEl.style.display = ‘none’;
+  console.log(‘[waitlist] fetching…’);
 
   try {
     const res = await fetch(BACKEND_URL + ‘/waitlist’, {
